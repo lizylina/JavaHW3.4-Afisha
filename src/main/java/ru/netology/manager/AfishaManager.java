@@ -6,9 +6,6 @@ public class AfishaManager {
   private Film[] films = new Film[0];
   private int filmsToReturn = 10;
 
-  public AfishaManager() {
-  }
-
   public AfishaManager(int filmsToReturn) {
     this.filmsToReturn = filmsToReturn;
   }
@@ -27,7 +24,6 @@ public class AfishaManager {
 
   public Film[] getLastFilms() {
     int length = filmsToReturn;
-
     if (length > films.length) {
       length = films.length;
     }
