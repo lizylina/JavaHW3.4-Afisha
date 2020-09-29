@@ -1,15 +1,23 @@
 package ru.netology.manager;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.domain.Film;
-import ru.netology.manager.AfishaManager;
+import ru.netology.repository.AfishaRepository;
 
+@ExtendWith(MockitoExtension.class)
 public class AfishaManagerTest {
+    @Mock
+    private AfishaRepository repository;
 
-    private AfishaManager manager = new AfishaManager(10);
-
+    @InjectMocks
+    private AfishaManager manager;
     Film first = new Film(1, "Бладшот", "Боевик", "Image1", false);
     Film second = new Film(2, "Вперёд", "Мультфильм", "Image2", true);
     Film third = new Film(3, "Отель Белград", "Комедия", "Image3", false);
@@ -24,57 +32,39 @@ public class AfishaManagerTest {
 
     @Test
     void shouldAdd() {
-        Film[] expected = new Film[]{tenth};
-        manager.add(tenth);
-        assertArrayEquals(expected, manager.getLastFilms());
+        Film[] returned = new Film[]{};
+        doReturn(returned).when(repository).findAll();
+        doNothing().when(repository).save(first);
+        manager.add(first);
+        Film[] expected = new Film[]{};
+        assertArrayEquals(expected, manager.getLastFilms(10));
     }
 
     @Test
     void shouldShowLessThanDefault() {
+        Film[] returned = new Film[]{first, second, third, fourth, fifth};
+        doReturn(returned).when(repository).findAll();
         Film[] expected = new Film[]{fifth, fourth, third, second, first};
-
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-
-        assertArrayEquals(expected, manager.getLastFilms());
+        assertArrayEquals(expected, manager.getLastFilms(5));
     }
 
     @Test
     void shouldShowMoreThanDefault() {
-        AfishaManager manager = new AfishaManager(11);
-
+        Film[] returned = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth,
+                eleventh};
+        doReturn(returned).when(repository).findAll();
         Film[] expected = new Film[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
-
-        manager.add(first);
-        manager.add(second);
-        manager.add(third);
-        manager.add(fourth);
-        manager.add(fifth);
-        manager.add(sixth);
-        manager.add(seventh);
-        manager.add(eighth);
-        manager.add(ninth);
-        manager.add(tenth);
-        manager.add(eleventh);
-
-        assertArrayEquals(expected, manager.getLastFilms());
+        assertArrayEquals(expected, manager.getLastFilms(11));
     }
-
 
     @Test
     void shouldGetFilms() {
-        Film[] expected = new Film[]{second, first};
-        manager.add(first);
-        manager.add(second);
+        Film[] returned = new Film[]{first, second, third};
+        doReturn(returned).when(repository).findAll();
 
-        assertArrayEquals(expected, manager.getLastFilms());
-    }
+        Film[] expected = new Film[]{third, second, first};
 
-    @Test
-    void shouldReturnEmptyAfisha() {
-        assertArrayEquals(new Film[0], manager.getLastFilms());
+        assertArrayEquals(expected, manager.getLastFilms(3));
     }
 }
+
