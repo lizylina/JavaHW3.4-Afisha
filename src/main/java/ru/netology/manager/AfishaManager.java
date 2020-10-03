@@ -11,11 +11,18 @@ public class AfishaManager {
     this.repository = repository;
   }
 
+  public AfishaManager() {
+  }
+
+  public AfishaManager(AfishaRepository repository, int i) {
+  }
+
+
   public void add(Film film) {
     repository.save (film);
   }
 
-  public Film[] getLastFilms(int filmsToReturn) {
+  public Film[] getLastFilms() {
     int length = filmsToReturn;
     Film[] films = repository.findAll();
 
@@ -32,5 +39,3 @@ public class AfishaManager {
     return result;
   }
 }
-
-
