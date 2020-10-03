@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Film;
 
-public class AfishaManagerTest {
+public class AfishaCustomManagerTest {
 
-    private AfishaManager manager = new AfishaManager();
+    private AfishaManager manager = new AfishaManager(5);
 
     Film first = new Film(1, "Бладшот", "Боевик", "Image1", false);
     Film second = new Film(2, "Вперёд", "Мультфильм", "Image2", true);
@@ -15,16 +15,11 @@ public class AfishaManagerTest {
     Film fourth = new Film(4, "Джентльмены", "Боевик", "Image4", false);
     Film fifth = new Film(5, "Человек-невидимка", "Ужасы", "Image5", false);
     Film sixth = new Film(6, "Тролли. Мировой тур", "Мультфильм", "Image6", true);
-    Film seventh = new Film(7, "Номер один", "Комедия", "Image7", true);
-    Film eighth = new Film(8, "Довод", "Фантастика", "Image8", false);
-    Film ninth = new Film(9, "Новые мутанты", "Ужасы", "Image9", true);
-    Film tenth = new Film(10, "Мулан", "Боевик", "Image10", false);
-    Film eleventh = new Film(11, "Гренландия", "Боевик", "Image11", false);
 
     @Test
     void shouldAdd() {
-        Film[] expected = new Film[]{tenth};
-        manager.add(tenth);
+        Film[] expected = new Film[]{fifth};
+        manager.add(fifth);
         assertArrayEquals(expected, manager.getLastFilms());
     }
 
@@ -38,7 +33,7 @@ public class AfishaManagerTest {
     }
 
     @Test
-    void shouldShowLessThanDefault() {
+    void shouldShowLessThan5() {
         Film[] expected = new Film[]{fifth, fourth, third, second, first};
 
         manager.add(first);
@@ -51,10 +46,10 @@ public class AfishaManagerTest {
     }
 
     @Test
-    void shouldShowMoreThanDefault() {
-        AfishaManager manager = new AfishaManager(11);
+    void shouldShowMoreThan5() {
+        AfishaManager manager = new AfishaManager(6);
 
-        Film[] expected = new Film[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
+        Film[] expected = new Film[]{sixth, fifth, fourth, third, second, first};
 
         manager.add(first);
         manager.add(second);
@@ -62,11 +57,6 @@ public class AfishaManagerTest {
         manager.add(fourth);
         manager.add(fifth);
         manager.add(sixth);
-        manager.add(seventh);
-        manager.add(eighth);
-        manager.add(ninth);
-        manager.add(tenth);
-        manager.add(eleventh);
 
         assertArrayEquals(expected, manager.getLastFilms());
     }

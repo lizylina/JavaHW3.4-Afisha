@@ -10,6 +10,9 @@ public class AfishaManager {
     this.filmsToReturn = filmsToReturn;
   }
 
+  public AfishaManager() {
+  }
+
   public void add(Film film) {
     Film[] tmp = new Film[films.length + 1];
 
