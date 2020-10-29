@@ -37,7 +37,7 @@ public class AfishaCustomManagerTest {
     }
 
     @Test
-    void shouldGetFilms() {
+    void shouldShowLessThanCustomized() {
         Film[] returned = new Film[]{first, second, third};
         doReturn(returned).when(repository).findAll();
 
@@ -47,7 +47,7 @@ public class AfishaCustomManagerTest {
     }
 
     @Test
-    void shouldShowLessThanDefault() {
+    void shouldShowCustomized() {
         Film[] returned = new Film[]{first, second, third, fourth, fifth};
         doReturn(returned).when(repository).findAll();
         Film[] expected = new Film[]{fifth, fourth, third, second, first};
@@ -55,10 +55,10 @@ public class AfishaCustomManagerTest {
     }
 
     @Test
-    void shouldShowMoreThanDefault() {
+    void shouldntShowMoreThanCustomized() {
         Film[] returned = new Film[]{first, second, third, fourth, fifth, sixth};
         doReturn(returned).when(repository).findAll();
-        Film[] expected = new Film[]{sixth, fifth, fourth, third, second, first};
+        Film[] expected = new Film[]{sixth, fifth, fourth, third, second};
         assertArrayEquals(expected, manager.getLastFilms());
     }
 }

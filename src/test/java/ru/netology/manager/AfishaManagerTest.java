@@ -41,11 +41,11 @@ public class AfishaManagerTest {
     }
 
     @Test
-    void shouldGetFilms() {
-        Film[] returned = new Film[]{first, second, third};
+    void shouldShowDefault() {
+        Film[] returned = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth};
         doReturn(returned).when(repository).findAll();
 
-        Film[] expected = new Film[]{third, second, first};
+        Film[] expected = new Film[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
 
         assertArrayEquals(expected, manager.getLastFilms());
     }
@@ -59,7 +59,7 @@ public class AfishaManagerTest {
     }
 
     @Test
-    void shouldShowMoreThanDefault() {
+    void shouldntShowMoreThanDefault() {
         Film[] returned = new Film[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth,
                 eleventh};
         doReturn(returned).when(repository).findAll();

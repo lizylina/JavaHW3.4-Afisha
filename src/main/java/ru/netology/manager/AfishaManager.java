@@ -14,9 +14,10 @@ public class AfishaManager {
   public AfishaManager() {
   }
 
-  public AfishaManager(AfishaRepository repository, int i) {
+  public AfishaManager(AfishaRepository repository, int filmsToReturn) {
+    this.repository = repository;
+    this.filmsToReturn = filmsToReturn;
   }
-
 
   public void add(Film film) {
     repository.save (film);
