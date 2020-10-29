@@ -24,7 +24,7 @@ public class AfishaCustomManagerTest {
     }
 
     @Test
-    void shouldGetFilms() {
+    void shouldShowLessThanCustomized() {
         Film[] expected = new Film[]{second, first};
         manager.add(first);
         manager.add(second);
@@ -33,7 +33,7 @@ public class AfishaCustomManagerTest {
     }
 
     @Test
-    void shouldShowLessThan5() {
+    void shouldShowCustomized() {
         Film[] expected = new Film[]{fifth, fourth, third, second, first};
 
         manager.add(first);
@@ -46,10 +46,9 @@ public class AfishaCustomManagerTest {
     }
 
     @Test
-    void shouldShowMoreThan5() {
-        AfishaManager manager = new AfishaManager(6);
+    void shouldntShowMoreThanCustomized() {
 
-        Film[] expected = new Film[]{sixth, fifth, fourth, third, second, first};
+        Film[] expected = new Film[]{sixth, fifth, fourth, third, second};
 
         manager.add(first);
         manager.add(second);

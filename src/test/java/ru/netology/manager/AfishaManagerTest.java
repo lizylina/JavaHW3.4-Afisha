@@ -29,10 +29,18 @@ public class AfishaManagerTest {
     }
 
     @Test
-    void shouldGetFilms() {
-        Film[] expected = new Film[]{second, first};
+    void shouldShowDefault() {
+        Film[] expected = new Film[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
         manager.add(first);
         manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
+        manager.add(fifth);
+        manager.add(sixth);
+        manager.add(seventh);
+        manager.add(eighth);
+        manager.add(ninth);
+        manager.add(tenth);
 
         assertArrayEquals(expected, manager.getLastFilms());
     }
@@ -51,10 +59,9 @@ public class AfishaManagerTest {
     }
 
     @Test
-    void shouldShowMoreThanDefault() {
-        AfishaManager manager = new AfishaManager(11);
+    void shouldntShowMoreThanDefault() {
 
-        Film[] expected = new Film[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
+        Film[] expected = new Film[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second};
 
         manager.add(first);
         manager.add(second);
